@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePage"
+    android:background="#C1CDC1">
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="Cursive"
+        android:gravity="center"
+        android:text="Welcome!"
+        android:textColor="@android:color/black"
+        android:textSize="50dp"
+        android:typeface="monospace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="314dp"
+        android:layout_height="226dp"
+        android:layout_marginBottom="60dp"
+        android:background="@null"
+        android:onClick="onClickProfile"
+        android:scaleType="fitCenter"
+        android:src="@drawable/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/photo"
+        android:layout_width="314dp"
+        android:layout_height="226dp"
+        android:layout_marginBottom="216dp"
+        android:background="@null"
+        android:onClick="onClickPhoto"
+        android:scaleType="fitCenter"
+        android:src="@drawable/photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/manual"
+        android:layout_width="314dp"
+        android:layout_height="226dp"
+        android:layout_marginBottom="356dp"
+        android:background="@null"
+        android:onClick="onClickManual"
+        android:scaleType="fitCenter"
+        android:src="@drawable/manual"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/signOut"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="256dp"
+        android:background="#006400"
+        android:textColor="#FFFFFF"
+        android:text="Sign out"
+        app:layout_constraintTop_toBottomOf="@id/manual"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
