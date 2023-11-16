@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C1CDC1"
+    tools:context=".SurveyActivity">
+
+    <TextView
+        android:id="@+id/textViewSurveyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_marginBottom="26dp"
+        android:text="@string/skin_survey_title"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/pick_skin_type_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/combo_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/combination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/acne_prone_button"
+        app:layout_constraintTop_toBottomOf="@+id/dry_button" />
+
+    <Button
+        android:id="@+id/oily_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/oily"
+        app:layout_constraintBottom_toTopOf="@+id/acne_prone_button"
+        app:layout_constraintEnd_toStartOf="@+id/dry_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pick_skin_type_text" />
+
+    <Button
+        android:id="@+id/dry_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:text="@string/dry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/oily_button"
+        app:layout_constraintTop_toTopOf="@+id/oily_button" />
+
+    <Button
+        android:id="@+id/acne_prone_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="26dp"
+        android:text="@string/acne_prone"
+        app:layout_constraintBottom_toTopOf="@+id/survey_instructions_text"
+        app:layout_constraintEnd_toStartOf="@+id/combo_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oily_button" />
+
+    <TextView
+        android:id="@+id/pick_skin_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/pick_skin_type"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/oily_button"
+        app:layout_constraintStart_toStartOf="@+id/oily_button"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSurveyTitle" />
+
+    <TextView
+        android:id="@+id/survey_instructions_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="21dp"
+        android:text="@string/skin_survey_instructions"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/allergies_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/allergies_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/acne_prone_button" />
+
+    <EditText
+        android:id="@+id/allergies_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edittext_background"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/enter_ingredients"
+        android:inputType="textMultiLine"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/survey_instructions_text" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="115dp"
+        android:text="@string/submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allergies_edit_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

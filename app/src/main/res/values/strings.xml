@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">SkinSavvy</string>
     <string name="default_web_client_id">Temp\n</string>
+    <string name="skin_survey_title">Skin Survey</string>
+    <string name="pick_skin_type">Pick your skin type:</string>
+    <string name="oily">Oily</string>
+    <string name="dry">Dry</string>
+    <string name="acne_prone">Acne prone</string>
+    <string name="combination">Combination</string>
+    <string name="skin_survey_instructions">Is there any ingredient that you are:\n1. Allergic to\n2. Intolerant/sensitive to\n3. Want to avoid?\n\nList them here (separated by commas)! \nWe will watch out for you.</string>
+    <string name="submit">Submit</string>
+    <string name="enter_ingredients">\n\tEnter ingredients...</string>
 </resources>
