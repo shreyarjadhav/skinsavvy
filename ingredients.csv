@@ -1,0 +1,58 @@
+INGREDIENT NAME,ACNE,OILY,DRY,COMBO
+Paraben,-1,0,0,0
+Algae extract,-1,0,1,1
+Sodium Lauryl Sulfate,-1,-1,0,0
+Isopropyl Myristate,-1,-1,1,1
+Isopropyl Palmitate,-1,-1,1,1
+Isopropyl Alcohol,-1,-1,0,0
+Sodium Chloride,-1,-1,0,0
+Coconut Oil,-1,-1,1,1
+Cocoa Butter,-1,-1,1,1
+Benzoyl peroxide,1,1,0,1
+Salicylic acid,1,1,0,1
+Alpha hydroxy acids,1,1,0,1
+Sulfur,1,1,0,1
+Adapalene,1,1,0,1
+Azelaic acid,1,1,0,1
+Vitamin C,1,0,1,1
+Tea tree oil,1,1,0,1
+Hyaluronic acid,0,0,1,1
+Niacinamide,0,0,1,1
+Aloe Vera,0,0,1,1
+Jojoba Oil,0,0,1,1
+Glycerin,0,0,1,1
+Witch Hazel,-1,1,0,1
+Retinol,1,0,0,1
+Shea Butter,-1,-1,1,1
+Rosehip Oil,0,0,1,1
+Green Tea Extract,0,0,1,1
+Squalane,0,0,1,1
+Glycolic Acid,1,1,0,1
+Zinc Oxide ,0,0,1,1
+Calamine,0,0,1,1
+Bentonite Magma,0,0,1,1
+Calcium Hydroxide,-1,-1,0,0
+Purified Water,0,0,0,0
+Water,0,0,0,0
+Cetearyl Alcohol,0,0,1,1
+Petrolatum,-1,1,1,0
+Stearic Acid,0,0,-1,0
+C12-15 Alkyl Benzoate,0,1,-1,0
+Aluminum Starch Octenylsuccinate,0,1,0,0
+Dimethicone,0,1,1,1
+Laureth-3,0,0,-1,0
+Ceteareth-20,0,1,1,0
+Allantoin,1,0,1,1
+Arginine,0,1,1,0
+Sodium Hydroxide,-1,0,0,0
+Carbomer,0,0,0,0
+Fragrance,-1,-1,-1,-1
+Panthenol,0,1,1,1
+Lecithin,0,1,1,1
+Pentylene Glycol,0,1,1,1
+Alcohol,-1,1,-1,0
+Ascorbyl Palmitate,0,1,1,1
+Tocopherol,0,1,1,1
+Methylparaben,-1,0,-1,0
+Phenoxyethanol,-1,0,-1,0
+Ethylparaben,-1,0,-1,0
