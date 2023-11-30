@@ -61,4 +61,18 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+    public void navigateToCameraScan(View view){
+        Intent intent = new Intent(this, CameraScan.class);
+        startActivity(intent);
+    }
+
+    public void navigateToProfile(View view){
+        Intent intent = new Intent(this, ProfilePage.class);
+        startActivity(intent);
+    }
+
+    public void navigateToManualSearch(View view){
+        Intent intent = new Intent(this, ManualSearch.class);
+        startActivity(intent);
+    }
     }

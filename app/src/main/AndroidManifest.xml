@@ -16,6 +16,12 @@
         android:theme="@style/Theme.SkinSavvy"
         tools:targetApi="31">
         <activity
+            android:name=".ManualSearch"
+            android:exported="false" />
+        <activity
+            android:name=".ProfilePage"
+            android:exported="false" />
+        <activity
             android:name=".CameraScan"
             android:exported="false" />
         <activity
