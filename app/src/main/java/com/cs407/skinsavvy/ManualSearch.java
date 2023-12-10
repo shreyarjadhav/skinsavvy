@@ -20,11 +20,22 @@ import java.util.List;
 public class ManualSearch extends AppCompatActivity {
     String[] key;
     int[] value;
+    EditText ingredientsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_search);
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("source")) {
+            String sourceIdentifier = intent.getStringExtra("source");
+            if ("Camera".equals(sourceIdentifier)) {
+                ingredientsList.setText(intent.getStringExtra("ingredients"));
+            }
+        }
+        else {
+            ingredientsList = findViewById(R.id.ingredientsList);
+        }
     }
 
     private <T> List<T> getColVal(String columnName, Class<T> valueType) {
@@ -73,9 +84,8 @@ public class ManualSearch extends AppCompatActivity {
     }
 
 
-
     public void navigateToResultsPage(View view) {
-        EditText ingredientsList = findViewById(R.id.ingredientsList);
+
         key = ingredientsList.getText().toString().split(",");
         value = new int[key.length];
 
@@ -127,32 +137,32 @@ public class ManualSearch extends AppCompatActivity {
                         if (ingredients[i].trim().equals(key[j].trim())) {
 
                             if (isOily == 1) {
-                                    if(oily.get(i) == -1){
-                                        def = -1;
-                                        break;
-                                    }
-                                    def = Math.max(def,oily.get(i));
+                                if (oily.get(i) == -1) {
+                                    def = -1;
+                                    break;
+                                }
+                                def = Math.max(def, oily.get(i));
                             }
                             if (isDry == 1) {
-                                if(dry.get(i) == -1){
+                                if (dry.get(i) == -1) {
                                     def = -1;
                                     break;
                                 }
-                                def = Math.max(def,dry.get(i));
+                                def = Math.max(def, dry.get(i));
                             }
                             if (isAcne == 1) {
-                                if(acne.get(i) == -1){
+                                if (acne.get(i) == -1) {
                                     def = -1;
                                     break;
                                 }
-                                def = Math.max(def,acne.get(i));
+                                def = Math.max(def, acne.get(i));
                             }
                             if (isCombo == 1) {
-                                if(combo.get(i) == -1){
+                                if (combo.get(i) == -1) {
                                     def = -1;
                                     break;
                                 }
-                                def = Math.max(def,combo.get(i));
+                                def = Math.max(def, combo.get(i));
                             }
                         }
                     }
@@ -163,9 +173,9 @@ public class ManualSearch extends AppCompatActivity {
             //Take care of allergies
             String allergiesData = cursor.getString(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_ALLERGIES));
             List<String> allergiesList = Arrays.asList(allergiesData.split(","));
-            for(int i = 0;i<key.length;i++){
-                for(int j = 0;j<allergiesList.size();j++){
-                    if(key[i].trim().equals(allergiesList.get(j).trim())){
+            for (int i = 0; i < key.length; i++) {
+                for (int j = 0; j < allergiesList.size(); j++) {
+                    if (key[i].trim().equals(allergiesList.get(j).trim())) {
                         value[j] = -2;
                     }
                 }
