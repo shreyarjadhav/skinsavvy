@@ -18,9 +18,14 @@ public class SurveyDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMBO = "combo";
     public static final String COLUMN_ALLERGIES = "allergies";
 
+    public static final String COLUMN_USERID = "userid";
+
+
+
     private static final String CREATE_TABLE_SURVEY =
             "CREATE TABLE " + TABLE_SURVEY + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_USERID + " TEXT, " +
                     COLUMN_OILY + " INTEGER, " +
                     COLUMN_DRY + " INTEGER, " +
                     COLUMN_ACNE + " INTEGER, " +

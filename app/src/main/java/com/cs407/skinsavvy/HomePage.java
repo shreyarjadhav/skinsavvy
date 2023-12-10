@@ -68,6 +68,7 @@ public class HomePage extends AppCompatActivity {
 
     public void navigateToProfile(View view){
         Intent intent = new Intent(this, ProfilePage.class);
+        intent.putExtra("intent_identifier", "home");
         startActivity(intent);
     }
 

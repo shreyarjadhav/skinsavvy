@@ -16,6 +16,7 @@ public class SkincareDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DRY = "dry";
     public static final String COLUMN_COMBO = "combo";
 
+
     private static final String CREATE_TABLE_INGREDIENTS =
             "CREATE TABLE " + TABLE_INGREDIENTS + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

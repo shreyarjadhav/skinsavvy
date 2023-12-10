@@ -2,6 +2,7 @@ package com.cs407.skinsavvy;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -111,7 +115,13 @@ public class SurveyActivity extends AppCompatActivity {
         int acneValue = isAcne ? 1 : 0;
         int comboValue = isCombo ? 1 : 0;
 
-        // Store survey data in the survey.db database
+        String userId = "";
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            userId = acct.getId();
+        }
+
+
         SQLiteDatabase surveyDb = new SurveyDatabaseHelper(this).getWritableDatabase();
 
         try {
@@ -121,6 +131,7 @@ public class SurveyActivity extends AppCompatActivity {
             surveyValues.put(SurveyDatabaseHelper.COLUMN_ACNE, acneValue);
             surveyValues.put(SurveyDatabaseHelper.COLUMN_COMBO, comboValue);
             surveyValues.put(SurveyDatabaseHelper.COLUMN_ALLERGIES, allergiesData);
+            surveyValues.put(SurveyDatabaseHelper.COLUMN_USERID,userId);
 
             long newRowId = surveyDb.insert(SurveyDatabaseHelper.TABLE_SURVEY, null, surveyValues);
 
@@ -134,19 +145,25 @@ public class SurveyActivity extends AppCompatActivity {
             Toast.makeText(SurveyActivity.this, "Survey database created successfully", Toast.LENGTH_SHORT).show();
         }
 
-        // intent to nav to Profile Page
+
+
+
+        SharedPreferences preferences = getSharedPreferences("survey_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putBoolean("IS_OILY", isOily);
+        editor.putBoolean("IS_DRY", isDry);
+        editor.putBoolean("IS_ACNE", isAcne);
+        editor.putBoolean("IS_COMBO", isCombo);
+        editor.putString("ALLERGIES", allergiesData);
+
+        editor.apply();
+
         Intent intent = new Intent(SurveyActivity.this, ProfilePage.class);
-
-        // pass selected skin types to Profile Page
-        intent.putExtra("IS_OILY", isOily);
-        intent.putExtra("IS_DRY", isDry);
-        intent.putExtra("IS_ACNE", isAcne);
-        intent.putExtra("IS_COMBO", isCombo);
-        intent.putExtra("ALLERGIES", allergiesData);    // pass allergies data Profile Page
-
-        // start ProfilePage
+        intent.putExtra("intent_identifier", "survey");
         startActivity(intent);
-        finish();   // finish SurveyActivity
+        finish();
+
     }
 
     private class LoadDataTask extends AsyncTask<Void, Void, Void> {
@@ -194,6 +211,7 @@ public class SurveyActivity extends AppCompatActivity {
                     values.put(SkincareDatabaseHelper.COLUMN_OILY, oily);
                     values.put(SkincareDatabaseHelper.COLUMN_DRY, dry);
                     values.put(SkincareDatabaseHelper.COLUMN_COMBO, combo);
+
 
                     // Insert with conflict ignore to avoid updating existing data
                     long newRowId = db.insertWithOnConflict(
