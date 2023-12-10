@@ -6,36 +6,81 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.util.Log; // Added import statement
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ManualSearch extends AppCompatActivity {
-    Map<String, Integer> valueMap = new HashMap<>();
+    String[] key;
+    int[] value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_search);
+    }
 
+    private <T> List<T> getColVal(String columnName, Class<T> valueType) {
+        List<T> valuesList = new ArrayList<>();
+        SQLiteDatabase db = new SkincareDatabaseHelper(this).getReadableDatabase();
+
+        Cursor cursor = null;
+        try {
+            String[] col = {columnName};
+
+            cursor = db.query(
+                    SkincareDatabaseHelper.TABLE_INGREDIENTS,
+                    col,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    int columnIndex = cursor.getColumnIndexOrThrow(columnName);
+
+                    if (valueType == Integer.class) {
+                        int columnValue = cursor.getInt(columnIndex);
+                        valuesList.add(valueType.cast(columnValue));
+                    } else if (valueType == String.class) {
+                        String columnValue = cursor.getString(columnIndex);
+                        valuesList.add(valueType.cast(columnValue));
+                    }
+
+                } while (cursor.moveToNext());
+            } else {
+                Log.d("getColumnVal", "No data " + columnName);
+            }
+
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return valuesList;
+    }
+
+
+
+    public void navigateToResultsPage(View view) {
         EditText ingredientsList = findViewById(R.id.ingredientsList);
-
-        String[] values = ingredientsList.toString().split(",");
+        key = ingredientsList.getText().toString().split(",");
+        value = new int[key.length];
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-
         SQLiteDatabase surveyDb = new SurveyDatabaseHelper(this).getReadableDatabase();
-
 
         try {
             String[] projection = {
@@ -59,40 +104,71 @@ public class ManualSearch extends AppCompatActivity {
                     null
             );
 
-            if (cursor != null && cursor.moveToFirst()) {
+            //Take care of skin type
 
+            if (cursor != null && cursor.moveToFirst()) {
                 int isOily = cursor.getInt(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_OILY));
                 int isDry = cursor.getInt(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_DRY));
                 int isAcne = cursor.getInt(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_ACNE));
                 int isCombo = cursor.getInt(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_COMBO));
 
+                List<Integer> oily = getColVal(SkincareDatabaseHelper.COLUMN_OILY, Integer.class);
+                List<Integer> dry = getColVal(SkincareDatabaseHelper.COLUMN_DRY, Integer.class);
+                List<Integer> acne = getColVal(SkincareDatabaseHelper.COLUMN_ACNE, Integer.class);
+                List<Integer> combo = getColVal(SkincareDatabaseHelper.COLUMN_COMBO, Integer.class);
 
-                int[] oily = getColumnValues(SkincareDatabaseHelper.COLUMN_OILY);
-                int[] dry = getColumnValues(SkincareDatabaseHelper.COLUMN_DRY);
-                int[] acne = getColumnValues(SkincareDatabaseHelper.COLUMN_ACNE);
-                int[] combo = getColumnValues(SkincareDatabaseHelper.COLUMN_COMBO);
 
-                String[] ingredients = {SkincareDatabaseHelper.COLUMN_INGREDIENT_NAME};
-                for(String val : values){
-                    for(int i = 0;i<ingredients.length;i++){
-                        int def = 0;
-                        if(isOily == 1){
-                            def = Math.max(0, oily[i]);
-                        }
-                        if(isDry == 1){
-                            def = Math.max(0, dry[i]);
-                        }
-                        if(isAcne == 1){
-                            def = Math.max(0, dry[i]);
-                        }
-                        if(isCombo == 1){
-                            def = Math.max(0, dry[i]);
-                        }
-                        valueMap.put(val,def);
+                List<String> ingredientsL = getColVal(SkincareDatabaseHelper.COLUMN_INGREDIENT_NAME, String.class);
+                String[] ingredients = ingredientsL.toArray(new String[0]);
 
+                for (int j = 0; j < key.length; j++) {
+                    int def = 0;
+                    for (int i = 0; i < ingredients.length; i++) {
+                        if (ingredients[i].trim().equals(key[j].trim())) {
+
+                            if (isOily == 1) {
+                                    if(oily.get(i) == -1){
+                                        def = -1;
+                                        break;
+                                    }
+                                    def = Math.max(def,oily.get(i));
+                            }
+                            if (isDry == 1) {
+                                if(dry.get(i) == -1){
+                                    def = -1;
+                                    break;
+                                }
+                                def = Math.max(def,dry.get(i));
+                            }
+                            if (isAcne == 1) {
+                                if(acne.get(i) == -1){
+                                    def = -1;
+                                    break;
+                                }
+                                def = Math.max(def,acne.get(i));
+                            }
+                            if (isCombo == 1) {
+                                if(combo.get(i) == -1){
+                                    def = -1;
+                                    break;
+                                }
+                                def = Math.max(def,combo.get(i));
+                            }
+                        }
+                    }
+                    value[j] = def;
+                }
+            }
+
+            //Take care of allergies
+            String allergiesData = cursor.getString(cursor.getColumnIndexOrThrow(SurveyDatabaseHelper.COLUMN_ALLERGIES));
+            List<String> allergiesList = Arrays.asList(allergiesData.split(","));
+            for(int i = 0;i<key.length;i++){
+                for(int j = 0;j<allergiesList.size();j++){
+                    if(key[i].trim().equals(allergiesList.get(j).trim())){
+                        value[j] = -2;
                     }
                 }
-
             }
 
             if (cursor != null) {
@@ -101,54 +177,10 @@ public class ManualSearch extends AppCompatActivity {
         } finally {
             surveyDb.close();
         }
-    }
 
-    private int[] getColumnValues(String columnName) {
-        List<Integer> vals = new ArrayList<>();
-
-        SQLiteDatabase db = new SkincareDatabaseHelper(this).getReadableDatabase();
-
-        try {
-            String[] col = {columnName};
-
-            Cursor cursor = db.query(
-                    SkincareDatabaseHelper.TABLE_INGREDIENTS,
-                    col,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null
-            );
-
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    int columnValue = cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
-                    vals.add(columnValue);
-                } while (cursor.moveToNext());
-            }
-
-
-            if (cursor != null) {
-                cursor.close();
-            }
-        } finally {
-
-            db.close();
-        }
-
-        int[] valuesArray = new int[vals.size()];
-        for (int i = 0; i < vals.size(); i++) {
-            valuesArray[i] = vals.get(i);
-        }
-
-        return valuesArray;
-    }
-
-    public void navigateToResultsPage(View view){
         Intent intent = new Intent(this, ManualResult.class);
-        Map<String, Integer> valueMap = new HashMap<>();
+        intent.putExtra("key", key);
+        intent.putExtra("val", value);
         startActivity(intent);
     }
-
 }
