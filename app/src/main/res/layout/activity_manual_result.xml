@@ -54,6 +54,8 @@
             android:layout_centerHorizontal="true"
             android:padding="16dp"
             android:text="Return Home"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:onClick="navigateToHomePage"/>
     </RelativeLayout>
