@@ -224,6 +224,7 @@ public class CameraScan extends AppCompatActivity {
                             String textRecognized = text.getText();
                             recognizedText.setText(textRecognized);
                             int index = textRecognized.indexOf(':');
+
                             String result = textRecognized.substring(index + 1);
                             Intent intent = new Intent(CameraScan.this, ManualSearch.class);
                             intent.putExtra("source", "CameraClass");
