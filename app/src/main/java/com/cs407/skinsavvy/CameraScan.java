@@ -37,6 +37,7 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 
 public class CameraScan extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class CameraScan extends AppCompatActivity {
     private Button cameraButton;
     private Button scanButton;
     private ShapeableImageView imageHolder;
-    private EditText recognizedText;
+//    private EditText recognizedText;
 
     //image URI var and accessing permissions
     private Uri imageUri = null;
@@ -63,7 +64,7 @@ public class CameraScan extends AppCompatActivity {
         cameraButton = findViewById(R.id.photoButton);
         scanButton = findViewById(R.id.scanButton);
         imageHolder = findViewById(R.id.image);
-        recognizedText = findViewById(R.id.recognizedText);
+//        recognizedText = findViewById(R.id.recognizedText);
 
         //permissions arrays
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -142,10 +143,9 @@ public class CameraScan extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if (data != null) {
-
                             imageUri = result.getData().getData();
-                            imageHolder.setImageURI(imageUri);
-
+                            CropImage.activity(imageUri)
+                                    .start(CameraScan.this);
                         }
                         else{
                             Toast.makeText(CameraScan.this, "Data Null Gallery", Toast.LENGTH_SHORT).show();
@@ -180,7 +180,8 @@ public class CameraScan extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        imageHolder.setImageURI(imageUri);
+                        CropImage.activity(imageUri)
+                                .start(CameraScan.this);
                     } else {
                         Toast.makeText(CameraScan.this, "Failed Camera", Toast.LENGTH_SHORT).show();
                     }
@@ -222,7 +223,7 @@ public class CameraScan extends AppCompatActivity {
                         @Override
                         public void onSuccess(Text text) {
                             String textRecognized = text.getText();
-                            recognizedText.setText(textRecognized);
+//                            recognizedText.setText(textRecognized);
                             int index = textRecognized.indexOf(':');
 
                             String result = textRecognized.substring(index + 1);
@@ -263,6 +264,21 @@ public class CameraScan extends AppCompatActivity {
                     Toast.makeText(this, "Storage Permissions Needed", Toast.LENGTH_SHORT).show();
                 }
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                imageHolder.setImageURI(resultUri);
+                imageUri = resultUri;
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
         }
     }
 }
