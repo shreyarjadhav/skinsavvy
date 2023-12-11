@@ -137,7 +137,7 @@ public class ManualSearch extends AppCompatActivity {
                 for (int j = 0; j < key.length; j++) {
                     int def = 0;
                     for (int i = 0; i < ingredients.length; i++) {
-                        if (ingredients[i].trim().equals(key[j].trim())) {
+                        if (ingredients[i].trim().toLowerCase().equals(key[j].trim().toLowerCase())) {
 
                             if (isOily == 1) {
                                 if (oily.get(i) == -1) {
@@ -178,7 +178,7 @@ public class ManualSearch extends AppCompatActivity {
             List<String> allergiesList = Arrays.asList(allergiesData.split(","));
             for (int i = 0; i < key.length; i++) {
                 for (int j = 0; j < allergiesList.size(); j++) {
-                    if (key[i].trim().equals(allergiesList.get(j).trim())) {
+                    if (key[i].trim().toLowerCase().equals(allergiesList.get(j).trim().toLowerCase())) {
                         value[j] = -2;
                     }
                 }
