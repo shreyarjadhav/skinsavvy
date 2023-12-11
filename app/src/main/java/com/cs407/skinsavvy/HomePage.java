@@ -40,7 +40,7 @@ public class HomePage extends AppCompatActivity {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
             name = acct.getDisplayName();
-            welcomeMsg.setText("Welcome " + name);
+            welcomeMsg.setText("Welcome, " + name + "!");
 
         }
         signOutBtn.setOnClickListener(new View.OnClickListener() {
