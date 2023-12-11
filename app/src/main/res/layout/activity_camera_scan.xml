@@ -7,7 +7,7 @@
     android:padding= "10dp"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="C9E1EF">
+    android:background="#C9E1EF">
 
     <LinearLayout
         android:layout_width="match_parent"
