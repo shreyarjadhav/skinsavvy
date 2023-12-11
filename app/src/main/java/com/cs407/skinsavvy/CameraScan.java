@@ -223,7 +223,6 @@ public class CameraScan extends AppCompatActivity {
                         public void onSuccess(Text text) {
                             String textRecognized = text.getText();
                             recognizedText.setText(textRecognized);
-                            Toast.makeText(CameraScan.this,textRecognized, Toast.LENGTH_SHORT);
                             int index = textRecognized.indexOf(':');
                             String result = textRecognized.substring(index + 1);
                             Intent intent = new Intent(CameraScan.this, ManualSearch.class);
