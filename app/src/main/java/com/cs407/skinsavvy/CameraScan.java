@@ -18,6 +18,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -222,14 +223,13 @@ public class CameraScan extends AppCompatActivity {
                         public void onSuccess(Text text) {
                             String textRecognized = text.getText();
                             recognizedText.setText(textRecognized);
+                            Toast.makeText(CameraScan.this,textRecognized, Toast.LENGTH_SHORT);
                             int index = textRecognized.indexOf(':');
                             String result = textRecognized.substring(index + 1);
-                            Intent intent = new Intent(CameraScan.this, ManualResult.class);
+                            Intent intent = new Intent(CameraScan.this, ManualSearch.class);
                             intent.putExtra("source", "CameraClass");
                             intent.putExtra("ingredients",result);
                             startActivity(intent);
-
-
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -242,10 +242,6 @@ public class CameraScan extends AppCompatActivity {
         catch(Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void toTextBox(String label, Object value) {
-        recognizedText.setText(label + ": " + value + "\n");
     }
 
     @Override

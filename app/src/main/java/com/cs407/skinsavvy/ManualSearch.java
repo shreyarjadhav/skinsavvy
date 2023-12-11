@@ -26,17 +26,21 @@ public class ManualSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_search);
+
+        ingredientsList = findViewById(R.id.ingredientsList);
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("source")) {
             String sourceIdentifier = intent.getStringExtra("source");
-            if ("Camera".equals(sourceIdentifier)) {
-                ingredientsList.setText(intent.getStringExtra("ingredients"));
+            if ("CameraClass".equals(sourceIdentifier)) {
+                String result = intent.getStringExtra("ingredients");
+                if (result != null) {
+                    ingredientsList.setText(result);
+                }
             }
         }
-        else {
-            ingredientsList = findViewById(R.id.ingredientsList);
-        }
     }
+
 
     private <T> List<T> getColVal(String columnName, Class<T> valueType) {
         List<T> valuesList = new ArrayList<>();
@@ -126,7 +130,6 @@ public class ManualSearch extends AppCompatActivity {
                 List<Integer> dry = getColVal(SkincareDatabaseHelper.COLUMN_DRY, Integer.class);
                 List<Integer> acne = getColVal(SkincareDatabaseHelper.COLUMN_ACNE, Integer.class);
                 List<Integer> combo = getColVal(SkincareDatabaseHelper.COLUMN_COMBO, Integer.class);
-
 
                 List<String> ingredientsL = getColVal(SkincareDatabaseHelper.COLUMN_INGREDIENT_NAME, String.class);
                 String[] ingredients = ingredientsL.toArray(new String[0]);
