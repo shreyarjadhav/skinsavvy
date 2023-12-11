@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                     navigateToHomePage();
                 }
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(), "Something Went Wrong ", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "Google sign-in failed with ApiException: " + e.getStatusCode(), e);
             }
         }
