@@ -32,7 +32,7 @@ public class ProfilePage extends AppCompatActivity {
 
         if (acct != null) {
             name = acct.getDisplayName();
-            hello.setText("Hi, " + name + "!");
+            hello.setText("Hey, " + name + "!");
         }
     }
 
@@ -93,12 +93,12 @@ public class ProfilePage extends AppCompatActivity {
                 if (isCombo == 1) {
                     skinTypes.add("Combination");
                 }
-                String skintypeText = "Skin Type: " + TextUtils.join(", ", skinTypes);
+                String skintypeText = "Here is your indicated skin type(s): " + TextUtils.join(", ", skinTypes);
                 skintype.setText(skintypeText);
 
                 TextView allergiesTextView = findViewById(R.id.allergiesTextView);
                 List<String> allergiesList = Arrays.asList(allergiesData.split(","));
-                StringBuilder allergiesText = new StringBuilder("Here is a list of ingredients that you are allergic to:\n");
+                StringBuilder allergiesText = new StringBuilder("Just as a reminder! \n Here are the ingredients that you wanted to avoid:\n");
                 for (String allergy : allergiesList) {
                     allergiesText.append("• ").append(allergy.trim()).append("\n");
                 }
