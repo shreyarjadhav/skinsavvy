@@ -88,22 +88,20 @@ public class SurveyActivity extends AppCompatActivity {
 
     // method to update button colors based on boolean variables
     private void updateButtonColors() {
-        oilyButton.setBackgroundTintList(
-                isOily ? ColorStateList.valueOf(Color.parseColor("#FFFFFF")) : ColorStateList.valueOf(Color.parseColor("#6750A4")));
-        oilyButton.setTextColor(isOily ? Color.parseColor("#000000") : Color.parseColor("#FFFFFF"));
+        oilyButton.setBackgroundTintList(isOily ? ColorStateList.valueOf(Color.parseColor("#000000")) : ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        oilyButton.setTextColor(isOily ? Color.parseColor("#FFFFFF") : Color.parseColor("#000000"));
 
-        dryButton.setBackgroundTintList(
-                isDry ? ColorStateList.valueOf(Color.parseColor("#FFFFFF")) : ColorStateList.valueOf(Color.parseColor("#6750A4")));
-        dryButton.setTextColor(isDry ? Color.parseColor("#000000") : Color.parseColor("#FFFFFF"));
+        dryButton.setBackgroundTintList(isDry ? ColorStateList.valueOf(Color.parseColor("#000000")) : ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        dryButton.setTextColor(isDry ? Color.parseColor("#FFFFFF") : Color.parseColor("#000000"));
 
-        acneProneButton.setBackgroundTintList(
-                isAcne ? ColorStateList.valueOf(Color.parseColor("#FFFFFF")) : ColorStateList.valueOf(Color.parseColor("#6750A4")));
-        acneProneButton.setTextColor(isAcne ? Color.parseColor("#000000") : Color.parseColor("#FFFFFF"));
+        acneProneButton.setBackgroundTintList(isAcne ? ColorStateList.valueOf(Color.parseColor("#000000")) : ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        acneProneButton.setTextColor(isAcne ? Color.parseColor("#FFFFFF") : Color.parseColor("#000000"));
 
-        comboButton.setBackgroundTintList(
-                isCombo ? ColorStateList.valueOf(Color.parseColor("#FFFFFF")) : ColorStateList.valueOf(Color.parseColor("#6750A4")));
-        comboButton.setTextColor(isCombo ? Color.parseColor("#000000") : Color.parseColor("#FFFFFF"));
+        comboButton.setBackgroundTintList(isCombo ? ColorStateList.valueOf(Color.parseColor("#000000")) : ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+        comboButton.setTextColor(isCombo ? Color.parseColor("#FFFFFF") : Color.parseColor("#000000"));
     }
+
+
 
     // method to retrieve allergies and nav to Profile Page and store in survey database
     private void goToProfilePage() {
