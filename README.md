@@ -21,5 +21,6 @@ Resources Utilized
 - https://www.youtube.com/@AtifSayings Recognize text in images | Google ML | Android Studio | Java
 - https://github.com/ArthurHub/Android-Image-Cropper for Image Cropping
 
-App poster: https://www.canva.com/design/DAF2oRMeRKs/QkUSK-eeVJLBEIzvANqqZg/view?utm_content=DAF2oRMeRKs&utm_campaign=designshare&utm_medium=link&utm_source=editor
+App Poster 
+- https://www.canva.com/design/DAF2oRMeRKs/QkUSK-eeVJLBEIzvANqqZg/view?utm_content=DAF2oRMeRKs&utm_campaign=designshare&utm_medium=link&utm_source=editor
 
