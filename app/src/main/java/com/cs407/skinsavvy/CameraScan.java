@@ -45,6 +45,7 @@ public class CameraScan extends AppCompatActivity {
     //activity main xml variables
     private Button cameraButton;
     private Button scanButton;
+    private Button returnButton;
     private ShapeableImageView imageHolder;
 //    private EditText recognizedText;
 
@@ -63,6 +64,7 @@ public class CameraScan extends AppCompatActivity {
         //initializations
         cameraButton = findViewById(R.id.photoButton);
         scanButton = findViewById(R.id.scanButton);
+        returnButton = findViewById(R.id.returnButton);
         imageHolder = findViewById(R.id.image);
 //        recognizedText = findViewById(R.id.recognizedText);
 
@@ -87,6 +89,13 @@ public class CameraScan extends AppCompatActivity {
                 else{
                     onText();
                 }
+            }
+        });
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CameraScan.this, HomePage.class);
+                startActivity(intent);
             }
         });
 
@@ -149,7 +158,6 @@ public class CameraScan extends AppCompatActivity {
                         }
                         else{
                             Toast.makeText(CameraScan.this, "Data Null Gallery", Toast.LENGTH_SHORT).show();
-
                         }
 
                     } else {
