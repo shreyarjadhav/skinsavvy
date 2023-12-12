@@ -3,6 +3,8 @@
     <style name="Base.Theme.SkinSavvy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/white</item> <!-- Set the button color to white -->
+        <item name="colorOnPrimary">@color/black</item> <!-- Set the text color to black -->
     </style>
 
     <style name="Theme.SkinSavvy" parent="Base.Theme.SkinSavvy" />
