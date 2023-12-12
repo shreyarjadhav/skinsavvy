@@ -179,7 +179,7 @@ public class ManualSearch extends AppCompatActivity {
             for (int i = 0; i < key.length; i++) {
                 for (int j = 0; j < allergiesList.size(); j++) {
                     if (key[i].trim().toLowerCase().equals(allergiesList.get(j).trim().toLowerCase())) {
-                        value[j] = -2;
+                        value[i] = -2;
                     }
                 }
             }
