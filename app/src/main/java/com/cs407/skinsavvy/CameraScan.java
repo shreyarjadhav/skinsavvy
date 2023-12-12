@@ -170,8 +170,6 @@ public class CameraScan extends AppCompatActivity {
         Intent intent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         cameraARL.launch(intent);
-
-
     }
     //ActivityResultLauncher for Camera
     private ActivityResultLauncher<Intent> cameraARL = registerForActivityResult(
@@ -256,6 +254,7 @@ public class CameraScan extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "Camera / Storage Permissions Needed", Toast.LENGTH_SHORT).show();
                     }
+                break;
             case GALLERY_SEARCH_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     picFromGallery();
@@ -263,7 +262,7 @@ public class CameraScan extends AppCompatActivity {
                 else {
                     Toast.makeText(this, "Storage Permissions Needed", Toast.LENGTH_SHORT).show();
                 }
-
+                break;
         }
     }
 
